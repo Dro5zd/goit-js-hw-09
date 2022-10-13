@@ -5,18 +5,17 @@ const body = document.querySelector('body');
 const getRandomHexColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 const randomBodyColorHandler = () => body.style.backgroundColor = `${getRandomHexColor()}`;
 
-let interval = '';
+let myInterval;
 stopBtn.setAttribute('disabled', 'disabled');
 
 function startBtnHandler() {
-  interval = setInterval(randomBodyColorHandler, 1000);
+  myInterval = setInterval(randomBodyColorHandler, 1000);
   startBtn.setAttribute('disabled', 'disabled');
   stopBtn.removeAttribute('disabled');
 }
 
-
 function stopBtnHandler() {
-  clearInterval(interval);
+  clearInterval(myInterval);
   startBtn.removeAttribute('disabled');
   stopBtn.setAttribute('disabled', 'disabled');
 }
