@@ -8,7 +8,7 @@ form.addEventListener('input', e => {
 });
 
 form.addEventListener('submit', (event) => {
-  let {step, amount, delay} = obj
+  let { step, amount, delay } = obj;
   event.preventDefault();
   let num = 1;
   let newDelay = +delay - +step;
@@ -23,20 +23,21 @@ form.addEventListener('submit', (event) => {
         Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
       });
 
-      interval = setInterval(()=>{
-        num += 1;
-        newDelay += +step;
-        createPromise(num, newDelay)
-          .then(({ position, delay }) => {
-            Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-          })
-          .catch(({ position, delay }) => {
-            Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-          });
-        if (num === +amount) {
-          clearInterval(interval);
-        }
-      },+step)
+    interval = setInterval(() => {
+      num += 1;
+      newDelay += +step;
+      createPromise(num, newDelay)
+        .then(({ position, delay }) => {
+          Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+        })
+        .catch(({ position, delay }) => {
+          Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+        });
+      if (num === +amount) {
+        clearInterval(interval);
+        document.querySelectorAll('input').forEach(el => el.value = '');
+      }
+    }, +step);
   }, delay);
 
 });
